@@ -1,0 +1,20 @@
+version: "3"
+services:
+    app-server:
+      image: 221082204698.dkr.ecr.ap-southeast-2.amazonaws.com/app-server:1.2
+      ports:
+      - 8000:8000
+      depends_on: 
+      - mongodb
+    mongodb:
+        image: mongo
+        ports:
+            - 27017:27017
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=password
+        volumes:
+            - mongo-data:/data/db
+volumes:
+    mongo-data:
+        driver: local
